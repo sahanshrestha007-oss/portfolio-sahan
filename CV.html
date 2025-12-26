@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sahan Shrestha - Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        background: linear-gradient(135deg, #3d4a5c 0%, #2c3744 100%);
+        color: white;
+        padding: 40px 30px;
+      }
+
+      .profile-img {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        margin: 0 auto 30px;
+        display: block;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        object-fit: cover;
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .contact-item,
+      .expertise-item,
+      .language-item {
+        margin-bottom: 20px;
+      }
+
+      .contact-label {
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+        color: #a8b5c7;
+      }
+
+      .contact-value {
+        font-size: 15px;
+      }
+
+      .expertise-item,
+      .language-item {
+        padding: 8px 0;
+        font-size: 16px;
+      }
+
+      .expertise-item:before {
+        content: "•";
+        margin-right: 10px;
+        color: #6b9bd1;
+        font-weight: bold;
+      }
+
+      .main-content {
+        background: #f8f9fa;
+        padding: 60px 80px;
+      }
+
+      .header {
+        margin-bottom: 50px;
+      }
+
+      .name {
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: 8px;
+        color: #2c3744;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        font-size: 24px;
+        color: #6b9bd1;
+        margin-bottom: 20px;
+        letter-spacing: 4px;
+      }
+
+      .description {
+        font-size: 18px;
+        color: #666;
+        line-height: 1.8;
+        max-width: 800px;
+      }
+
+      .content-section {
+        background: white;
+        padding: 40px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .content-section-title {
+        font-size: 32px;
+        font-weight: 700;
+        color: #2c3744;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #6b9bd1;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 40px;
+      }
+
+      .timeline-item:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 16px;
+        height: 16px;
+        border: 3px solid #6b9bd1;
+        background: white;
+        border-radius: 50%;
+      }
+
+      .timeline-item:after {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 24px;
+        width: 2px;
+        height: calc(100% + 20px);
+        background: #e0e0e0;
+      }
+
+      .timeline-item:last-child:after {
+        display: none;
+      }
+
+      .year {
+        font-size: 18px;
+        font-weight: 700;
+        color: #6b9bd1;
+        margin-bottom: 5px;
+      }
+
+      .institution {
+        font-size: 16px;
+        color: #888;
+        margin-bottom: 10px;
+      }
+
+      .skill-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2c3744;
+        margin-bottom: 15px;
+      }
+
+      .skill-description {
+        color: #666;
+        line-height: 1.8;
+      }
+
+      .education-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2c3744;
+        margin-bottom: 5px;
+      }
+
+      .reference-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .reference-card {
+        padding: 25px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #6b9bd1;
+      }
+
+      .reference-name {
+        font-size: 20px;
+        font-weight: 700;
+        color: #2c3744;
+        margin-bottom: 5px;
+      }
+
+      .reference-role {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      .reference-info {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 5px;
+      }
+
+      .download-section {
+        text-align: center;
+        padding: 60px 40px;
+        background: linear-gradient(135deg, #6b9bd1 0%, #3d4a5c 100%);
+        margin: 30px 0 0 0;
+        border-radius: 8px;
+      }
+
+      .download-title {
+        font-size: 28px;
+        color: white;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .download-text {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 30px;
+      }
+
+      .download-btn {
+        display: inline-block;
+        background: white;
+        color: #3d4a5c;
+        padding: 15px 40px;
+        font-size: 18px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        border: none;
+      }
+
+      .download-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        background: #f0f0f0;
+      }
+
+      .download-btn:active {
+        transform: translateY(-1px);
+      }
+
+      .download-icon {
+        margin-right: 10px;
+        font-size: 20px;
+      }
+
+      @media (max-width: 968px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .main-content {
+          padding: 40px 30px;
+        }
+
+        .name {
+          font-size: 36px;
+          letter-spacing: 4px;
+        }
+
+        .subtitle {
+          font-size: 20px;
+        }
+
+        .download-section {
+          padding: 40px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <img
+          src="photo1.jpeg"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%236b9bd1'/%3E%3Ctext x='100' y='115' font-size='80' text-anchor='middle' fill='white' font-family='Arial'%3ESS%3C/text%3E%3C/svg%3E"
+          alt="Profile"
+          class="profile-img"
+        />
+
+        <div class="section">
+          <h2 class="section-title">Contact</h2>
+          <div class="contact-item">
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">9849860491</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">angrybird12fly@gmail.com</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Address</div>
+            <div class="contact-value">Madhyapur Thimi-5, Bhaktapur</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">Education</h2>
+          <div class="contact-item">
+            <div class="contact-label">2024 - Present</div>
+            <div class="education-title">
+              Bachelor of Science in Computer Science and Information Technology
+            </div>
+            <div class="contact-value">Tribhuwan University</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">2022 - 2024</div>
+            <div class="education-title">
+              Higher Education +2 Science Faculty
+            </div>
+            <div class="contact-value">Khwopa Secondary School</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">Expertise</h2>
+          <div class="expertise-item">Photoshop</div>
+          <div class="expertise-item">Illustrator</div>
+          <div class="expertise-item">Html</div>
+          <div class="expertise-item">Canvas</div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">Language</h2>
+          <div class="language-item">English</div>
+          <div class="language-item">Nepali</div>
+          <div class="language-item">Newari</div>
+          <div class="language-item">Hindi</div>
+          <div class="language-item">Chinese</div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="header">
+          <h1 class="name">SAHAN SHRESTHA</h1>
+          <div class="subtitle">Bsc.csit student</div>
+          <p class="description">
+            A passionate web developer and Bsc.csit student crafting digital
+            experiences with modern technologies and creative solutions
+          </p>
+        </header>
+
+        <section class="content-section">
+          <h2 class="content-section-title">Skills</h2>
+
+          <div class="timeline-item">
+            <div class="year">2025</div>
+            <div class="institution">
+              SWASTIK COLLEGE, Madhyapur thimi-5, Bhaktapur
+            </div>
+            <div class="skill-title">Web development</div>
+            <p class="skill-description">
+              Web development covers a wide range of applications, including web
+              gaming for interactive and browser-based entertainment, e-commerce
+              platforms that enable online buying, selling, and secure digital
+              transactions, and portfolio websites that showcase skills,
+              projects, and professional identity. Together, these areas
+              highlight how modern web technologies support creativity, business
+              growth, and personal branding on the internet.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="year">2025</div>
+            <div class="institution">
+              SWASTIK COLLEGE, Madhyapur thimi-5, Bhaktapur
+            </div>
+            <div class="skill-title">Cyber Security</div>
+            <p class="skill-description">
+              Cyber Security focuses on protecting computer systems, networks,
+              and data from unauthorized access, attacks, and damage. It
+              involves practices such as threat detection, encryption, network
+              security, and user awareness to prevent cyber threats like
+              hacking, malware, and data breaches. Effective cyber security
+              ensures data confidentiality, integrity, and availability in the
+              digital world.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="year">2024</div>
+            <div class="institution">
+              SWASTIK COLLEGE, Madhyapur thimi-5, Bhaktapur
+            </div>
+            <div class="skill-title">Computer graphics</div>
+            <p class="skill-description">
+              Computer graphics focuses on creating and manipulating visual
+              content using digital tools and technologies. It includes working
+              with canvas for drawing and animations, using Photoshop for image
+              editing and photo enhancement, designing posters for visual
+              communication, editing videos for multimedia content, and using
+              Illustrator to create professional logos and vector-based designs.
+              Together, these tools help produce creative, high-quality visual
+              media for digital and print platforms.
+            </p>
+          </div>
+        </section>
+
+        <section class="content-section">
+          <h2 class="content-section-title">Reference</h2>
+          <div class="reference-grid">
+            <div class="reference-card">
+              <div class="reference-name">Susan Sunuwar</div>
+              <div class="reference-role">Co-ordinator</div>
+              <div class="reference-info">
+                <strong>Phone:</strong> 977-1-6635174
+              </div>
+              <div class="reference-info">
+                <strong>Email:</strong> swastikcollege.edu.np
+              </div>
+            </div>
+            <div class="reference-card">
+              <div class="reference-name">Laxmi Karmacharya</div>
+              <div class="reference-role">Principle</div>
+              <div class="reference-info">
+                <strong>Phone:</strong> 01-6618031, 6614336
+              </div>
+              <div class="reference-info">
+                <strong>Email:</strong> khwopahss.edu.np
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="download-section">
+          <h2 class="download-title">Interested in Working Together?</h2>
+          <p class="download-text">
+            Download my CV to learn more about my experience and skills
+          </p>
+          <button class="download-btn" onclick="downloadCV()">
+            <span class="download-icon">⬇</span>Download CV
+          </button>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      function downloadCV() {
+        // Create a printable version
+        const originalTitle = document.title;
+        document.title = "Sahan_Shrestha_CV";
+
+        // Hide download button before printing
+        const downloadSection = document.querySelector(".download-section");
+        downloadSection.style.display = "none";
+
+        // Trigger print dialog
+        window.print();
+
+        // Restore download button after print dialog closes
+        setTimeout(() => {
+          downloadSection.style.display = "block";
+          document.title = originalTitle;
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

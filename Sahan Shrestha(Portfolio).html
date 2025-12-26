@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sahan Shrestha - Web Developer & Designer</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --secondary: #1e40af;
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --gray: #64748b;
+        --white: #ffffff;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: var(--dark);
+        background: var(--light);
+      }
+
+      /* Preloader Styles */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+
+      .preloader.fade-out {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .preloader-content {
+        text-align: center;
+        animation: fadeInUp 1s ease;
+      }
+
+      .preloader-text {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: textAppear 0.8s ease forwards 0.3s;
+      }
+
+      .preloader-subtitle {
+        font-size: 1.2rem;
+        color: #94a3b8;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: textAppear 0.8s ease forwards 0.6s;
+      }
+
+      .loader {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+        position: relative;
+        opacity: 0;
+        animation: textAppear 0.8s ease forwards 0.9s;
+      }
+
+      .loader-circle {
+        width: 100%;
+        height: 100%;
+        border: 4px solid rgba(37, 99, 235, 0.2);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes textAppear {
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Navigation */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: var(--white);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo-img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-menu a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 500;
+        transition: color 0.3s;
+        position: relative;
+      }
+
+      .nav-menu a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.3s;
+      }
+
+      .nav-menu a:hover {
+        color: var(--primary);
+      }
+
+      .nav-menu a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: var(--dark);
+        transition: all 0.3s;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 120px 2rem 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .hero-content .subtitle {
+        font-size: 1.5rem;
+        color: var(--gray);
+        margin-bottom: 2rem;
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+        color: var(--gray);
+        margin-bottom: 2rem;
+      }
+
+      .hero-image {
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-image img {
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+      }
+
+      .hero-image img:hover {
+        transform: scale(1.05);
+      }
+
+      .btn-primary {
+        display: inline-block;
+        padding: 12px 30px;
+        background: var(--primary);
+        color: var(--white);
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary:hover {
+        background: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+      }
+
+      /* Sections */
+      section {
+        padding: 80px 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--dark);
+      }
+
+      /* About Section */
+      .about-content {
+        background: var(--white);
+        padding: 3rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .about-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--gray);
+      }
+
+      /* Contact Info */
+      .contact-card {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+
+      .contact-card h3 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .contact-info div {
+        color: var(--gray);
+      }
+
+      /* Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .skill-card {
+        background: var(--white);
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .skill-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      .skill-card h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .skill-card p {
+        color: var(--gray);
+        line-height: 1.8;
+      }
+
+      /* Projects Section */
+      .projects-content {
+        background: var(--white);
+        padding: 4rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .projects-content p {
+        font-size: 1.2rem;
+        color: var(--gray);
+      }
+
+      /* Footer */
+      footer {
+        background: var(--dark);
+        color: var(--white);
+        padding: 4rem 2rem 2rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 3rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h4 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .footer-section p {
+        color: #94a3b8;
+        line-height: 1.8;
+      }
+
+      .footer-section a {
+        color: var(--white);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-section a:hover {
+        color: var(--primary);
+      }
+
+      .feedback-btn {
+        margin-top: 1rem;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid #334155;
+        color: #94a3b8;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: fixed;
+          left: -100%;
+          top: 70px;
+          flex-direction: column;
+          background: var(--white);
+          width: 100%;
+          text-align: center;
+          transition: 0.3s;
+          box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+          padding: 2rem 0;
+        }
+
+        .nav-menu.active {
+          left: 0;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          padding-top: 100px;
+          text-align: center;
+        }
+
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-content .subtitle {
+          font-size: 1.2rem;
+        }
+
+        .hero-image img {
+          width: 280px;
+          height: 280px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .preloader-text {
+          font-size: 1.8rem;
+        }
+
+        .preloader-subtitle {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+
+        .nav-container {
+          padding: 1rem;
+        }
+      }
+      .op {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preloader (Must be first) -->
+    <div class="preloader" id="preloader">
+      <div class="preloader-content">
+        <div class="preloader-text">Welcome to My Portfolio</div>
+        <div class="preloader-subtitle">Loading amazing content...</div>
+        <div class="loader">
+          <div class="loader-circle"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo-section">
+          <img src="Sah.png" class="op" />
+          <a href="#home" class="logo">Sahan Shrestha</a>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>SAHAN SHRESTHA</h1>
+        <p class="subtitle">BSc.CSIT Student</p>
+        <p>
+          A passionate web developer crafting digital experiences with modern
+          technologies and creative solutions
+        </p>
+        <a href="#contact" class="btn-primary">Get In Touch</a>
+      </div>
+      <a href="CV.html">
+        <div class="hero-image">
+          <img
+            src="photo1.jpeg"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='350'%3E%3Crect fill='%232563eb' width='350' height='350'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='white' text-anchor='middle' dy='.3em'%3ESS%3C/text%3E%3C/svg%3E"
+          /></div
+      ></a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <p>
+          Hello! I'm <strong>Sahan Shrestha</strong>, a passionate BSc.CSIT
+          student driven by curiosity, creativity, and a strong love for
+          technology. With a solid foundation in computer graphics and web
+          development, I enjoy transforming ideas into visually engaging and
+          functional digital experiences. I thrive on learning new tools,
+          exploring innovative design concepts, and building solutions that
+          blend aesthetics with performance. Energetic, motivated, and always
+          eager to grow, I'm constantly pushing myself to turn challenges into
+          opportunities and ideas into impactful creations.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-card">
+        <h3>Get In Touch</h3>
+        <div class="contact-info">
+          <div><strong>Email:</strong> Angrybird12fly@gmail.com</div>
+          <div><strong>Phone:</strong> +977 9849860491</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Web Development</h3>
+          <p>
+            Expertise in creating interactive web experiences including web
+            gaming, e-commerce platforms with secure transactions, and
+            professional portfolio websites. Proficient in modern web
+            technologies that support creativity, business growth, and personal
+            branding.
+          </p>
+        </div>
+        <div class="skill-card">
+          <h3>Computer Graphics</h3>
+          <p>
+            Skilled in digital content creation using canvas for animations,
+            Photoshop for image editing, poster design for visual communication,
+            video editing for multimedia content, and Illustrator for
+            professional logos and vector-based designs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-content">
+        <p>Project showcase coming soon. Stay tuned for exciting updates!</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Sahan Shrestha</h4>
+          <p>
+            Thank you for taking the time to explore my work. I hope it has
+            provided you with a comprehensive glimpse into my skills,
+            experiences, and passion for what I do. I look forward to the
+            opportunity of collaborating and bringing innovative ideas to life!
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Learn More</h4>
+          <p>
+            Want to know more about me? Feel free to reach out through the
+            <a href="#contact">Contact</a> section or view my complete
+            <a href="CV.html"><strong>CV</strong></a
+            >. I'm always open to new opportunities and collaborations.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Feedback</h4>
+          <p>
+            If you have any compliments or would like to share feedback, please
+            feel free to contact me directly.
+          </p>
+          <a
+            href="mailto:Angrybird12fly@gmail.com"
+            class="btn-primary feedback-btn"
+            >Send Feedback</a
+          >
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Sahan Shrestha. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Preloader - Hide after page loads
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        setTimeout(() => {
+          preloader.classList.add("fade-out");
+        }, 1500); // Show for 1.5 seconds after load
+      });
+      // Mobile menu toggle
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll(".nav-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+        });
+      });
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.15)";
+        } else {
+          navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+        }
+      });
+    </script>
+  </body>
+</html>
